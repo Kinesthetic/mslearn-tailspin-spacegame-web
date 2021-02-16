@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using TailSpin.SpaceGame.Web.Models;
 
-namespace TailSpin.SpaceGame.Web
+namespace TailSpin.SpaceGame.Web 
 {
     public class LocalDocumentDBRepository<T> : IDocumentDBRepository<T> where T : Model
     {
@@ -38,7 +38,7 @@ namespace TailSpin.SpaceGame.Web
         {
             return Task<T>.FromResult(_items.Single(item => item.Id == id));
         }
-
+ 
         /// <summary>
         /// Retrieves items from the store that match the given query predicate.
         /// Results are given in descending order by the given ordering predicate.
@@ -60,8 +60,8 @@ namespace TailSpin.SpaceGame.Web
             var result = _items.AsQueryable()
                 .Where(queryPredicate) // filter
                 .OrderByDescending(orderDescendingPredicate) // sort
-                .Skip(page * pageSize) // find page
-                .Take(pageSize - 1) // take items
+                .Skip(page * pageSize) // find page  
+                .Take(pageSize) // take items
                 .AsEnumerable(); // make enumeratable
 
             return Task<IEnumerable<T>>.FromResult(result);
